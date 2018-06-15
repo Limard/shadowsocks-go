@@ -19,7 +19,7 @@ import (
 	"syscall"
 	"time"
 
-	ss "github.com/shadowsocks/shadowsocks-go/shadowsocks"
+	ss "github.com/Limard/shadowsocks-go/shadowsocks"
 )
 
 const (
@@ -154,6 +154,14 @@ func handleConnection(conn *ss.Conn, auth bool, port string) {
 		closed = true
 		return
 	}
+
+	// adblock
+	if b, s := isBlockHost(host); b {
+		log.Println("adblock host.", host, s)
+		closed = true
+		return
+	}
+
 	// ensure the host does not contain some illegal characters, NUL may panic on Win32
 	if strings.ContainsRune(host, 0x00) {
 		log.Println("invalid domain name.")
