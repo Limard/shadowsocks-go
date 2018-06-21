@@ -65,3 +65,22 @@ func loadOneFile(fPath string) (list []string) {
 	}
 	return
 }
+
+var adHostCounter = make(map[string]int, 0)
+var hostCounter = make(map[string]int, 0)
+
+//func statisticsServer() {
+//	http.HandleFunc(`/`, func(w http.ResponseWriter, r *http.Request) {
+//		w.Write([]byte(fmt.Sprintf("<p>current ip address: %v</p>", r.RemoteAddr)))
+//		w.Write([]byte("<p></p>"))
+//		w.Write([]byte("<p>AD block:</p>"))
+//		for key, value := range adHostCounter {
+//			w.Write([]byte(fmt.Sprintf("<p>%v [%v]</p>", key, value)))
+//		}
+//		w.Write([]byte("<p></p>"))
+//		w.Write([]byte("<p>URL:</p>"))
+//		for key, value := range hostCounter {
+//			w.Write([]byte(fmt.Sprintf("<p>%v [%v]</p>", key, value)))
+//		}
+//	})
+//}
