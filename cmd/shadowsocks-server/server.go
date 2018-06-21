@@ -157,10 +157,13 @@ func handleConnection(conn *ss.Conn, auth bool, port string) {
 
 	// adblock
 	if b, s := isBlockHost(host); b {
-		log.Println("adblock host.", host, s)
+		adHostCounter[host]++
+		fmt.Printf("Host[AD](%v): %v %v(%v)\n", adHostCounter[host], conn.RemoteAddr().String(), host, s)
 		closed = true
 		return
 	}
+	hostCounter[host]++
+	fmt.Printf("Host OK (%v): %v %v\n", hostCounter[host], conn.RemoteAddr().String(), host)
 
 	// ensure the host does not contain some illegal characters, NUL may panic on Win32
 	if strings.ContainsRune(host, 0x00) {
